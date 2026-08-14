@@ -1,0 +1,704 @@
+/* ==========================
+   CART HEADER
+========================== */
+
+.cart-header{
+    padding:140px 20px 40px;
+}
+
+.breadcrumb{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+    color:var(--muted);
+    font-size:.92rem;
+}
+
+.breadcrumb a{
+    transition:.25s;
+}
+
+.breadcrumb a:hover{
+    color:var(--primary);
+}
+
+.cart-header h1{
+    font-family:'Playfair Display',serif;
+    font-size:3rem;
+    color:var(--primary);
+    margin-bottom:15px;
+}
+
+
+
+/* ==========================
+   LAYOUT
+========================== */
+
+.cart-section{
+    padding:20px 20px 90px;
+}
+
+.cart-layout{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,2fr)
+        360px;
+
+    gap:35px;
+
+    align-items:start;
+
+}
+
+
+
+/* ==========================
+   PRODUCTOS
+========================== */
+
+.cart-products{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+
+
+.cart-item{
+
+    display:grid;
+
+    grid-template-columns:
+
+        170px
+        1fr
+        180px;
+
+    gap:28px;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.cart-item:hover{
+
+    transform:translateY(-4px);
+
+}
+
+
+
+.cart-image{
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+.cart-image img{
+
+    width:100%;
+
+    height:170px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+
+
+.cart-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.cart-info h2{
+
+    text-align:left;
+
+    margin:12px 0;
+
+    font-size:1.55rem;
+
+}
+
+.cart-description{
+
+    color:var(--muted);
+
+    line-height:1.7;
+
+}
+
+
+
+.cart-price{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+}
+
+
+
+.price{
+
+    font-size:1.45rem;
+
+    font-weight:800;
+
+    color:var(--primary);
+
+}
+
+.quantity-selector{
+
+    position:relative;
+
+}
+
+.quantity-decrease-wrap{
+
+    position:relative;
+
+    display:inline-flex;
+
+}
+
+.quantity-tooltip{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:100%;
+
+    transform:translate(-50%, -8px);
+
+    background:#1f2937;
+
+    color:#fff;
+
+    font-size:12px;
+
+    line-height:1.4;
+
+    padding:8px 10px;
+
+    border-radius:8px;
+
+    white-space:nowrap;
+
+    box-shadow:0 8px 20px rgba(0, 0, 0, 0.18);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .15s ease, transform .15s ease;
+
+    z-index:2;
+
+}
+
+.quantity-tooltip::after{
+
+    content:'';
+
+    position:absolute;
+
+    left:50%;
+
+    top:100%;
+
+    transform:translateX(-50%);
+
+    border-width:6px;
+
+    border-style:solid;
+
+    border-color:#1f2937 transparent transparent transparent;
+
+}
+
+.quantity-decrease-wrap:hover .quantity-tooltip,
+.quantity-decrease-wrap:focus-within .quantity-tooltip{
+
+    opacity:1;
+
+    transform:translate(-50%, -12px);
+
+}
+
+.variant-field{
+
+    margin:14px 0 10px;
+
+}
+
+.variant-field label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    color:#35242d;
+
+}
+
+.variant-form{
+
+    width:100%;
+
+}
+
+.variant-update-button{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:10px 14px;
+
+    border:1px solid transparent;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font:inherit;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+
+}
+
+.variant-update-button:hover{
+
+    background:#cc4b6e;
+
+    box-shadow:0 8px 18px rgba(204, 75, 110, .2);
+
+    transform:translateY(-1px);
+
+}
+
+.variant-update-button:focus-visible{
+
+    outline:3px solid rgba(231, 84, 128, .25);
+
+    outline-offset:2px;
+
+}
+
+.variant-select{
+
+    width:100%;
+
+    border:1px solid rgba(231, 84, 128, 0.18);
+
+    border-radius:14px;
+
+    padding:12px 14px;
+
+    background:#fff;
+
+    color:#35242d;
+
+    font:inherit;
+
+    font-weight:600;
+
+    box-shadow:0 8px 18px rgba(96, 46, 67, 0.06);
+
+    transition:border-color .2s ease, box-shadow .2s ease;
+
+}
+
+.variant-select:hover,
+.variant-select:focus{
+
+    outline:none;
+
+    border-color:#e75480;
+
+    box-shadow:0 0 0 4px rgba(231, 84, 128, 0.12);
+
+}
+
+.variant-note{
+
+    margin-top:10px;
+
+    font-size:.82rem;
+
+    color:#78636f;
+
+}
+
+
+
+/* ==========================
+   CANTIDAD
+========================== */
+
+.quantity-selector{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    background:#fff3f8;
+
+    border-radius:999px;
+
+    padding:8px 10px;
+
+    border:1px solid var(--border);
+
+}
+
+.quantity-selector button{
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    background:white;
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.quantity-selector button:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.quantity-selector span{
+
+    min-width:20px;
+
+    text-align:center;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================
+   SUBTOTAL
+========================== */
+
+.subtotal{
+
+    text-align:right;
+
+    color:var(--muted);
+
+}
+
+.subtotal strong{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:1.25rem;
+
+    color:var(--text);
+
+}
+
+
+
+/* ==========================
+   ELIMINAR
+========================== */
+
+.remove-item{
+
+    border:none;
+
+    background:none;
+
+    color:#cc4b6e;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.remove-item:hover{
+
+    color:#e75480;
+
+}
+
+
+
+/* ==========================
+   RESUMEN
+========================== */
+
+.cart-summary{
+
+    position:sticky;
+
+    top:115px;
+
+}
+
+
+
+.summary-card{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+.summary-card h2{
+
+    text-align:left;
+
+    margin-bottom:28px;
+
+}
+
+
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:16px;
+
+    color:var(--muted);
+
+}
+
+
+
+.summary-card hr{
+
+    margin:22px 0;
+
+    border:none;
+
+    border-top:1px solid rgba(0,0,0,.08);
+
+}
+
+
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:1.3rem;
+
+    font-weight:800;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.checkout-btn{
+
+    width:100%;
+
+}
+
+
+
+.summary-benefits{
+
+    margin-top:28px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+.benefit{
+
+    background:#fff3f8;
+
+    padding:12px 14px;
+
+    border-radius:14px;
+
+}
+
+
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:1100px){
+
+    .cart-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cart-summary{
+
+        position:relative;
+
+        top:0;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .cart-item{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cart-image img{
+
+        height:240px;
+
+    }
+
+    .cart-price{
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
+
+}
+
+
+
+@media(max-width:480px){
+
+    .cart-header h1{
+
+        font-size:2.4rem;
+
+    }
+
+    .quantity-selector{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+
+.cart-feedback{
+    margin:0 0 20px;
+    padding:14px 18px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.cart-feedback-success{
+    color:#166534;
+    background:#dcfce7;
+    border:1px solid #86efac;
+}
+
+.cart-feedback-error{
+    color:#991b1b;
+    background:#fee2e2;
+    border:1px solid #fca5a5;
+}
