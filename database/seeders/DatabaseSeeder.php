@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'lastname' => 'Admin',
+                'phone' => '+54 9 11 5555-1234',
                 'email_verified_at' => now(),
                 'password' => '12345678',
                 'is_admin' => true,

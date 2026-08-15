@@ -16,7 +16,6 @@ class EventQuote extends Model
     {
         return [
             'fecha_evento' => 'date',
-            'servicios' => 'array',
             'productos_preferidos' => 'array',
         ];
     }

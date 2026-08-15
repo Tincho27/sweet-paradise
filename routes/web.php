@@ -21,6 +21,7 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->middleware(['auth
 Route::post('/checkout', [CheckoutController::class, 'store'])->middleware(['auth', 'verified'])->name('checkoutStore');
 Route::get('/checkout/success/{order_number}', [CheckoutController::class, 'success'])->middleware(['auth', 'verified'])->name('confirmation');
 Route::get('/mesa-dulce', [MesaDulceController::class, 'index'])->middleware(['auth', 'verified'])->name('mesa.dulce');
+Route::post('/mesa-dulce', [MesaDulceController::class, 'store'])->middleware(['auth', 'verified'])->name('mesa.dulce.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
