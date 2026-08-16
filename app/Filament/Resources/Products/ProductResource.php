@@ -31,12 +31,12 @@ class ProductResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return ProductForm::configure($schema);
+        return ProductForm::createForm($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return ProductsTable::configure($table);
+        return ProductsTable::createTable($table);
     }
 
     public static function getRelations(): array

@@ -9,7 +9,7 @@ use Filament\Schemas\Components\Section;
 
 class OrderInfolist
 {
-    public static function configure(Schema $schema): Schema
+    public static function createInfolist(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -25,29 +25,7 @@ class OrderInfolist
                         TextEntry::make('estado_orden')
                             ->label('Estado')
                             ->badge()
-                            ->formatStateUsing(function (?string $state): string {
-                                if ($state === 'pendiente') {
-                                    return 'Pendiente';
-                                }
-
-                                if ($state === 'confirmado') {
-                                    return 'Confirmado';
-                                }
-
-                                if ($state === 'preparando') {
-                                    return 'Preparando';
-                                }
-
-                                if ($state === 'entregado') {
-                                    return 'Entregado';
-                                }
-
-                                if ($state === 'cancelado') {
-                                    return 'Cancelado';
-                                }
-
-                                return $state ?? 'Sin definir';
-                            })
+                            ->placeholder('Sin definir')
                             ->color(function (?string $state): string {
                                 if ($state === 'pendiente') {
                                     return 'warning';
@@ -69,11 +47,18 @@ class OrderInfolist
                             }),
                     ])
                     ->columns(2),
-                Section::make('Solicitud de mesa dulce')
+                Section::make('Solicitud de mesa')
                     ->schema([
                         TextEntry::make('eventQuote.id')
-                            ->label('Solicitud vinculada')
-                            ->placeholder('Sin solicitud vinculada'),
+                            ->hiddenLabel()
+                            ->placeholder('Sin vincular')
+                            ->formatStateUsing(function (?int $state): string {
+                                if ($state) {
+                                    return 'Solicitud vinculada';
+                                }
+
+                                return 'No vinculado';
+                            }),
                     ]),
                 Section::make('Entrega y observaciones')
                     ->schema([

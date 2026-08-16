@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 
 class ProductsTable
 {
-    public static function configure(Table $table): Table
+    public static function createTable(Table $table): Table
     {
         return $table
             ->columns([

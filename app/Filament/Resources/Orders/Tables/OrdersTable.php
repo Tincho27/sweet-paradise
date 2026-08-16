@@ -12,7 +12,7 @@ use Filament\Support\Icons\Heroicon;
 
 class OrdersTable
 {
-    public static function configure(Table $table): Table
+    public static function createTable(Table $table): Table
     {
         return $table
             ->columns([
@@ -40,29 +40,7 @@ class OrdersTable
                 TextColumn::make('estado_orden')
                     ->label('Estado')
                     ->badge()
-                    ->formatStateUsing(function (?string $state): string {
-                        if ($state === 'pendiente') {
-                            return 'Pendiente';
-                        }
-
-                        if ($state === 'confirmado') {
-                            return 'Confirmado';
-                        }
-
-                        if ($state === 'preparando') {
-                            return 'Preparando';
-                        }
-
-                        if ($state === 'entregado') {
-                            return 'Entregado';
-                        }
-
-                        if ($state === 'cancelado') {
-                            return 'Cancelado';
-                        }
-
-                        return $state ?? 'Sin definir';
-                    })
+                    ->placeholder('Sin definir')
                     ->color(function (?string $state): string {
                         if ($state === 'pendiente') {
                             return 'warning';
@@ -124,8 +102,8 @@ class OrdersTable
                     ->modalHeading('Confirmar pedido')
                     ->modalDescription('El estado cambiará de pendiente a confirmado.')
                     ->modalSubmitActionLabel('Confirmar pedido')
-                    ->visible(function (Order $record): bool {
-                        return $record->estado_orden === 'pendiente';
+                    ->disabled(function (Order $record): bool {
+                        return $record->estado_orden !== 'pendiente';
                     })
                     ->action(function (Order $record): void {
                         $record->update(['estado_orden' => 'confirmado']);
@@ -146,8 +124,8 @@ class OrdersTable
                     ->modalHeading('Cancelar pedido')
                     ->modalDescription('El estado cambiará de pendiente a cancelado.')
                     ->modalSubmitActionLabel('Cancelar pedido')
-                    ->visible(function (Order $record): bool {
-                        return $record->estado_orden === 'pendiente';
+                    ->disabled(function (Order $record): bool {
+                        return $record->estado_orden !== 'pendiente';
                     })
                     ->action(function (Order $record): void {
                         $record->update(['estado_orden' => 'cancelado']);

@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\Orders;
 
 use App\Filament\Resources\Orders\Pages\ListOrders;
+use App\Filament\Resources\Orders\Pages\CreateOrder;
 use App\Filament\Resources\Orders\Pages\ViewOrder;
+use App\Filament\Resources\Orders\Schemas\OrderForm;
 use App\Filament\Resources\Orders\Schemas\OrderInfolist;
 use App\Filament\Resources\Orders\Tables\OrdersTable;
 use App\Models\Order;
@@ -29,20 +31,24 @@ class OrderResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Pedidos';
 
+    public static function form(Schema $schema): Schema
+    {
+        return OrderForm::createForm($schema);
+    }
+
     public static function infolist(Schema $schema): Schema
     {
-        return OrderInfolist::configure($schema);
+        return OrderInfolist::createInfolist($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return OrdersTable::configure($table);
+        return OrdersTable::createTable($table);
     }
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->with('items.productVariant.product');
             ->with([
                 'eventQuote',
                 'items.productVariant.product',
@@ -51,7 +57,7 @@ class OrderResource extends Resource
 
     public static function canCreate(): bool
     {
-        return false;
+        return true;
     }
 
     public static function canEdit(Model $record): bool
@@ -80,6 +86,7 @@ class OrderResource extends Resource
     {
         return [
             'index' => ListOrders::route('/'),
+            'create' => CreateOrder::route('/create'),
             'view' => ViewOrder::route('/{record}'),
         ];
     }

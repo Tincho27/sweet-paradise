@@ -13,7 +13,7 @@ use Filament\Support\Icons\Heroicon;
 
 class EventQuoteInfolist
 {
-    public static function configure(Schema $schema): Schema
+    public static function createInfolist(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -68,7 +68,22 @@ class EventQuoteInfolist
                     ->schema([
                         TextEntry::make('estado')
                             ->label('Estado')
-                            ->badge(),
+                            ->badge()
+                            ->color(function (?string $state): string {
+                                if ($state === 'pendiente') {
+                                    return 'warning';
+                                }
+
+                                if ($state === 'aceptado') {
+                                    return 'success';
+                                }
+
+                                if ($state === 'rechazado') {
+                                    return 'danger';
+                                }
+
+                                return 'gray';
+                            }),
                         TextEntry::make('created_at')
                             ->label('Solicitud enviada')
                             ->dateTime('d/m/Y H:i'),

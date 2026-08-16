@@ -28,12 +28,12 @@ class EventQuoteResource extends Resource
 
     public static function infolist(Schema $schema): Schema
     {
-        return EventQuoteInfolist::configure($schema);
+        return EventQuoteInfolist::createInfolist($schema);
     }
 
     public static function table(Table $table): Table
     {
-        return EventQuotesTable::configure($table);
+        return EventQuotesTable::createTable($table);
     }
 
     public static function getRelations(): array

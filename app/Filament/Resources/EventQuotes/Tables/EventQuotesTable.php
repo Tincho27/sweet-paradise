@@ -8,7 +8,7 @@ use Filament\Tables\Table;
 
 class EventQuotesTable
 {
-    public static function configure(Table $table): Table
+    public static function createTable(Table $table): Table
     {
         return $table
             ->columns([
@@ -30,7 +30,22 @@ class EventQuotesTable
                     ->label('Servicio'),
                 TextColumn::make('estado')
                     ->label('Estado')
-                    ->badge(),
+                    ->badge()
+                    ->color(function (?string $state): string {
+                        if ($state === 'pendiente') {
+                            return 'warning';
+                        }
+
+                        if ($state === 'aceptado') {
+                            return 'success';
+                        }
+
+                        if ($state === 'rechazado') {
+                            return 'danger';
+                        }
+
+                        return 'gray';
+                    }),
                 TextColumn::make('convertedOrder.order_number')
                     ->label('Pedido vinculado')
                     ->placeholder('Sin pedido'),

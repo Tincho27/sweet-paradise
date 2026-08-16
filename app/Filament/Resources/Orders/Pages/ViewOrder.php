@@ -30,8 +30,12 @@ class ViewOrder extends ViewRecord
                 ->modalHeading('Confirmar pedido')
                 ->modalDescription('El estado cambiará de pendiente a confirmado.')
                 ->modalSubmitActionLabel('Confirmar pedido')
-                ->visible(fn (Order $record): bool => $record->estado_orden === 'pendiente')
-                ->action(fn (Order $record) => $record->update(['estado_orden' => 'confirmado']))
+                ->disabled(function (Order $record): bool {
+                    return $record->estado_orden !== 'pendiente';
+                })
+                ->action(function (Order $record): void {
+                    $record->update(['estado_orden' => 'confirmado']);
+                })
                 ->successNotificationTitle('Pedido confirmado'),
             Action::make('cancelar')
                 ->label('Cancelar pedido')
@@ -48,8 +52,12 @@ class ViewOrder extends ViewRecord
                 ->modalHeading('Cancelar pedido')
                 ->modalDescription('El estado cambiará de pendiente a cancelado.')
                 ->modalSubmitActionLabel('Cancelar pedido')
-                ->visible(fn (Order $record): bool => $record->estado_orden === 'pendiente')
-                ->action(fn (Order $record) => $record->update(['estado_orden' => 'cancelado']))
+                ->disabled(function (Order $record): bool {
+                    return $record->estado_orden !== 'pendiente';
+                })
+                ->action(function (Order $record): void {
+                    $record->update(['estado_orden' => 'cancelado']);
+                })
                 ->successNotificationTitle('Pedido cancelado'),
         ];
     }
