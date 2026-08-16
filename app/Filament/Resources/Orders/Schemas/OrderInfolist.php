@@ -69,6 +69,12 @@ class OrderInfolist
                             }),
                     ])
                     ->columns(2),
+                Section::make('Solicitud de mesa dulce')
+                    ->schema([
+                        TextEntry::make('eventQuote.id')
+                            ->label('Solicitud vinculada')
+                            ->placeholder('Sin solicitud vinculada'),
+                    ]),
                 Section::make('Entrega y observaciones')
                     ->schema([
                         TextEntry::make('metodo_entrega')

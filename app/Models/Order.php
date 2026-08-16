@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
@@ -43,5 +44,10 @@ class Order extends Model
     public function ingredientMovements(): HasMany
     {
         return $this->hasMany(IngredientMovement::class);
+    }
+
+    public function eventQuote(): HasOne
+    {
+        return $this->hasOne(EventQuote::class, 'converted_order_id');
     }
 }

@@ -43,6 +43,10 @@ class OrderResource extends Resource
     {
         return parent::getEloquentQuery()
             ->with('items.productVariant.product');
+            ->with([
+                'eventQuote',
+                'items.productVariant.product',
+            ]);
     }
 
     public static function canCreate(): bool
